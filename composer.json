@@ -1,0 +1,21 @@
+{
+    "name": "skopek/hooks",
+    "description": "PHP Hooks System",
+    "keywords": ["hooks", "action", "filter"],
+    "license": "GPL-3.0",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Mateusz Skopowski",
+            "email": "skopek012@gmail.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/skopek/hooks/issues"
+    },
+    "autoload": {
+        "psr-4": {
+            "Skopek\\Hooks\\": "src/"
+        }
+    }
+}
