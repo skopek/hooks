@@ -2,7 +2,7 @@
     "name": "skopek/hooks",
     "description": "PHP Hooks System",
     "keywords": ["hooks", "action", "filter"],
-    "license": "GPL-3.0",
+    "license": "MIT",
     "type": "library",
     "authors": [
         {
