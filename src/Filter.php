@@ -10,7 +10,7 @@
 		private static $filters = [];
 
 		/**
-		 * @param string $name
+		 * @param string $name The name of the filter.
 		 * @param callback $function
 		 * @param integer $priority
 		 */
@@ -19,16 +19,15 @@
 		}
 
 		/**
-		 * @param string $name
+		 * @param string $name The name of the filter.
 		 * @param mixed $value
 		 * @return mixed
 		 */
 		public static function apply( $name, $value ) {
 			$args = array_slice(func_get_args(), 2);
 
-			if ( !isset( static::$filters[$name] ) ) {
+			if ( !static::has( $name ) )
 				return $value;
-			}
 
 			ksort(static::$filters[ $name ]);
 
@@ -41,6 +40,17 @@
 			}
 
 			return $value;
+		}
+
+		/**
+		 * @param string $name The name of the filter.
+		 * @return boolean
+		 */
+		public static function has( $name ) {
+			if( isset( static::$filters[$name] ) && !empty( static::$filters[$name] ) )
+				return true;
+
+			return false;
 		}
 	}
 ?>

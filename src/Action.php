@@ -10,7 +10,7 @@
 		private static $actions = [];
 
 		/**
-		 * @param string $name
+		 * @param string $name The name of the action.
 		 * @param callback $function
 		 * @param integer $priority
 		 */
@@ -19,15 +19,14 @@
 		}
 
 		/**
-		 * @param string $name
-		 * @return bool
+		 * @param string $name The name of the action.
+		 * @return boolean
 		 */
 		public static function run( $name ) {
 			$args = array_slice(func_get_args(), 1);
 
-			if ( !isset( static::$actions[$name] ) ) {
+			if ( !static::has( $name ) )
 				return false;
-			}
 
 			ksort(static::$actions[ $name ]);
 
@@ -37,6 +36,17 @@
 					return true;
 				}
 			}
+		}
+
+		/**
+		 * @param string $name The name of the action.
+		 * @return boolean
+		 */
+		public static function has( $name ) {
+			if( isset( static::$actions[$name] ) && !empty( static::$actions[$name] ) )
+				return true;
+
+			return false;
 		}
 	}
 ?>
