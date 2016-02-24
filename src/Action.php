@@ -33,9 +33,9 @@
 			foreach (static::$actions[$name] as $priority => $functions) {
 				foreach ($functions as $function) {
 					call_user_func_array( $function, $args );
-					return true;
 				}
 			}
+			return true;
 		}
 
 		/**
