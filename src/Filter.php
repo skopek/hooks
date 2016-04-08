@@ -1,25 +1,10 @@
 <?php
 	namespace Skopek\Hooks;
 
-	class Filter
+	class Filter extends Hook
 	{
 		/**
-		 * list of hooks
-		 * @var array
-		 */
-		private static $filters = [];
-
-		/**
-		 * @param string $name The name of the filter.
-		 * @param callback $function
-		 * @param integer $priority
-		 */
-		public static function add( $name, $function, $priority = 10 ) {
-			static::$filters[ $name ][ $priority ][] = $function;
-		}
-
-		/**
-		 * @param string $name The name of the filter.
+		 * @param string $name The name of the hook.
 		 * @param mixed $value
 		 * @return mixed
 		 */
@@ -29,9 +14,9 @@
 			if ( !static::has( $name ) )
 				return $value;
 
-			ksort(static::$filters[ $name ]);
+			ksort(static::$hooks[ $name ]);
 
-			foreach (static::$filters[$name] as $priority => $functions) {
+			foreach (static::$hooks[$name] as $priority => $functions) {
 				foreach ($functions as $function) {
 					$all_args = array_merge( [$value], $args );
 
@@ -40,17 +25,6 @@
 			}
 
 			return $value;
-		}
-
-		/**
-		 * @param string $name The name of the filter.
-		 * @return boolean
-		 */
-		public static function has( $name ) {
-			if( isset( static::$filters[$name] ) && !empty( static::$filters[$name] ) )
-				return true;
-
-			return false;
 		}
 	}
 ?>
