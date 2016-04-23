@@ -4,33 +4,42 @@ use Skopek\Hooks\Action;
 
 class ActionTest extends PHPUnit_Framework_TestCase
 {
-	public function testBasicAction() {
-		Action::add("header_action", function() {
+	protected $action;
+
+	public function setUp()
+	{
+		$this->action = new Action;
+	}
+
+	public function testBasicAction()
+	{
+		$this->action->add("header", function() {
 			print "Hello";
 		});
 
-		Action::add("header_action", function() {
+		$this->action->add("header", function() {
 			print " World!";
 		});
 
-		$this->assertTrue( Action::has("header_action") );
+		$this->assertTrue( $this->action->has("header") );
 		$this->expectOutputString('Hello World!');
 
-		Action::run("header_action");
+		$this->action->run("header");
 	}
 
-	public function testActionPriority() {
-		Action::add("hello_action", function() {
+	public function testActionPriority() 
+	{
+		$this->action->add("hello", function() {
 			print " And more!";
 		}, 2);
 
-		Action::add("hello_action", function() {
+		$this->action->add("hello", function() {
 			print "Hello World!";
 		}, 1);
 
-		$this->assertTrue( Action::has("hello_action") );
+		$this->assertTrue( $this->action->has("hello") );
 		$this->expectOutputString('Hello World! And more!');
 
-		Action::run("hello_action");
+		$this->action->run("hello");
 	}
 }

@@ -4,29 +4,38 @@ use Skopek\Hooks\Filter;
 
 class FilterTest extends PHPUnit_Framework_TestCase
 {
-	public function testBasicFilter() {
-		Filter::add("header_filter", function($value) {
+	protected $filter;
+
+	public function setUp()
+	{
+		$this->filter = new Filter;
+	}
+
+	public function testBasicFilter() 
+	{
+		$this->filter->add("header", function($value) {
 			return $value . "Hello";
 		});
 
-		Filter::add("header_filter", function($value) {
+		$this->filter->add("header", function($value) {
 			return $value . " World!";
 		});
 
-		$this->assertTrue( Filter::has("header_filter") );
-		$this->assertEquals("Hello World!", Filter::apply("header_filter", ""));
+		$this->assertTrue( $this->filter->has("header") );
+		$this->assertEquals("Hello World!", $this->filter->apply("header", ""));
 	}
 
 	public function testFilterPriority() {
-		Filter::add("hello_filter", function($value) {
+		$this->filter->add("hello", function($value) 
+		{
 			return $value . " And more!";
 		}, 2);
 
-		Filter::add("hello_filter", function($value) {
+		$this->filter->add("hello", function($value) {
 			return $value . "Hello World!";
 		}, 1);
 
-		$this->assertTrue( Filter::has("hello_filter") );
-		$this->assertEquals("Hello World! And more!", Filter::apply("hello_filter", ""));
+		$this->assertTrue( $this->filter->has("hello") );
+		$this->assertEquals("Hello World! And more!", $this->filter->apply("hello", ""));
 	}
 }
