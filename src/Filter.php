@@ -22,7 +22,7 @@ class Filter extends Hook
 
 		foreach ($this->hooks[$name] as $priority => $functions) {
 			foreach ($functions as $function) {
-				$all_args = array_merge( [$value], $args );
+				$all_args = array_merge( array($value), $args );
 
 				$value = call_user_func_array( $function, $all_args );
 			}
