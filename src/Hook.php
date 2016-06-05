@@ -8,7 +8,7 @@ class Hook
 	 * list of hooks
 	 * @var array
 	 */
-	protected $hooks = [];
+	protected $hooks = array();
 
 	/**
 	 * @param string $name The name of the hook.

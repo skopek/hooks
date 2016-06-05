@@ -8,7 +8,7 @@ class Manager
 	 * list of instances
 	 * @var array
 	 */
-	protected $instances = [];
+	protected $instances = array();
 
 	/**
 	 * constructor
