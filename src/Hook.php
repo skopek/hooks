@@ -26,11 +26,6 @@ class Hook
 	 */
 	public function has($name) 
 	{
-		if (isset($this->hooks[$name]) && !empty($this->hooks[$name]))
-		{
-			return true;
-		}
-
-		return false;
+		return isset($this->hooks[$name]) && !empty($this->hooks[$name]);
 	}
 }
